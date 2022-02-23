@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Grid } from '../elements/index';
 import { history } from '../redux/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/user';
+import user, { actionCreators as userActions } from '../redux/modules/user';
 
 // image
 import HeaderLeftImg from '../images/header-left-delivery.gif';
@@ -16,6 +16,7 @@ const Header = props => {
 	const dispatch = useDispatch();
 	const is_login = useSelector(state => state.user.is_login);
 	const userInfo = useSelector(state => state.user.user);
+	console.log(userInfo)
 
 	const headerChange = () => {
 		const headerbox = document.querySelector('.header');
@@ -66,8 +67,9 @@ const Header = props => {
 								{is_login && (
 									<React.Fragment>
 										<li className="header-menu">
-											<MemberSpan>일반</MemberSpan>
-											{userInfo?.name} 님
+											<MemberSpan>웰컴</MemberSpan>
+											{/* {userInfo?.user.name}님 */}
+											{userInfo?.email}님
 										</li>
 										<li
 											className="header-menu"
@@ -118,10 +120,10 @@ const Header = props => {
 								className='heart-icon'
 								onClick={() => {
 									if (!userInfo) {
-										alert('로그인 후 사용해주세요!');
+										// alert('로그인 후 사용해주세요!');
 										return false;
 									}
-									history.push('/cart');
+									// history.push('/cart');
 								}}
 							></Icons>
 							<Icons
@@ -256,8 +258,8 @@ const Icons = styled.span`
 		background-image: url('https://res.kurly.com/pc/service/pick/btn-heart-off.svg');
 		margin: 0px 15px 0px 0px;
 		&:hover {
-			/* background-image: url('https://res.kurly.com/pc/service/pick/btn-heart-on.svg'); */
-			background-color: violet;
+			/* background-image: url('file:///Users/jeonghwan/Desktop/heart-3510.svg'); */
+			background-color: none;
 			border: none;
 		}
 	}

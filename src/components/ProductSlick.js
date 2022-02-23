@@ -5,6 +5,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Grid from '../elements/Grid';
 import Card from '../elements/Card';
+import { useSelector } from 'react-redux';
+
+
 
 const Wrap = styled.div`
 	width: 100%;
@@ -32,8 +35,9 @@ const Line = styled.p`
   margin-left: 6px;
 `;
 
+
 function NextArrow(props) {
-	const { className, style, onClick } = props;
+	const { className, style, onClick, } = props;
 	return (
 		<div
 			className={className}
@@ -62,6 +66,7 @@ function NextArrow(props) {
 		</div>
 	);
 }
+
 
 function PrevArrow(props) {
 	const { className, style, onClick } = props;
@@ -96,6 +101,11 @@ function PrevArrow(props) {
 }
 
 const ProductSlick = ({ productsList }) => {
+
+	// const product_list_count = useSelector(
+	// 	(state) => state.product.products.numberOfElements
+	//   );
+
 	const settings = {
 		speed: 500,
 		infinite: false,
@@ -131,13 +141,15 @@ const ProductSlick = ({ productsList }) => {
 
 	return (
 		<>
-			<Wrap>
-				<div style={{ textAlign: 'center', marginBottom: '2em' }}>
-					<span style={{ fontSize: '1.8em', fontWeight: 'bold' }}>신상품</span>
-				</div>
-				<Grid width="1050px" flex>
-			<Count>총 296개</Count>
-			<div style={{ display: "flex" }}>
+			 <Wrap>
+            <div style={{ textAlign: 'center', marginBottom: '2em' }}>
+                <span style={{ fontSize: '1.8em', fontWeight: 'bold', }}>신상품</span>
+            </div>
+			<Grid width="1050px" flex >
+			<div style={{ display: "flex" , marginLeft: '-18px'}}>
+			<Count>총 99개</Count>
+			</div>
+			<div style={{ display: "flex" , marginRight: '15px'}}>
                 <Sort>추천순</Sort>
                 <Line> | </Line>
                 <Sort>신상품순</Sort>
@@ -149,12 +161,15 @@ const ProductSlick = ({ productsList }) => {
                 <Sort>높은 가격순</Sort>
               </div>
 			</Grid>
-				<Slider {...settings}>
+			<Grid gridBox {...settings}>
 					{productsList?.map((v, i) => (
-						<Card key={i} title={v.title} img={v.img} price={v.price} />
+						<div style={{ display: "flex" , }} key={i}>
+							<Card key={i} title={v.title} img={v.img} price={v.price} postId={v.postId}/>
+						</div>
+						
 					))}
-				</Slider>
-			</Wrap>
+				</Grid>
+        </Wrap>
 		</>
 	);
 };

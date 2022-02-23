@@ -1,6 +1,3 @@
-// Signup.js
-
-// import를 한다.
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements/index';
@@ -14,7 +11,7 @@ import { api } from '../shared/api';
 const Signup = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [pwCheck, passwordConfirm] = useState('');
+	const [confirmpassword, setConfirmPassword] = useState('');
 	const [name, setName] = useState('');
 	// const [email, setEmail] = useState('');
 	const [emailDup, setEmailDup] = useState(false);
@@ -26,7 +23,7 @@ const Signup = props => {
 	};
 	console.log('아이디', email);
 	console.log('비밀번호', password);
-	console.log('비밀번호확인', pwCheck);
+	console.log('비밀번호확인', confirmpassword);
 	console.log('이름', name);
 	// console.log('이메일', email);
 
@@ -35,10 +32,20 @@ const Signup = props => {
 		setPassword(targetPw);
 	};
 
+	const changePwCheck = e => {
+		const targetPwCheck = e.target.value;
+		setConfirmPassword(targetPwCheck)
+	};
+
 	const changePwMacth = e => {
 		const checkPw = e.target.value;
-		passwordConfirm(checkPw);
+		setConfirmPassword(checkPw);
 	};
+
+	const changeName = e => {
+		const targetName = e.target.value;
+		setName(targetName)
+	}
 
 	const checkIdAPI = email => {
 		api
@@ -55,7 +62,7 @@ const Signup = props => {
 	};
 
 	const signUp = () => {
-		if (email === '' || password === '' || pwCheck === '' || name === '') {
+		if (email === '' || password === '' || confirmpassword === '' || name === '') {
 			alert('필수 입력사항을 모두 입력해주세요!');
 			return false;
 		}
@@ -69,6 +76,15 @@ const Signup = props => {
 			alert('비밀번호의 형식을 맞춰 입력해주세요. ');
 			return;
 		}
+
+		if (password !== confirmpassword) {
+			alert('동일한 비밀번호를 입력해주세요.');
+			return;
+		}
+		// if (changePw === changePwCheck) {
+		// 	alert('동일한 비밀번호를 입력해주세요!')
+		// 	return false;
+		// }
 
 		if (name === '') {
 			alert('이름을(를) 입력해주세요.');
@@ -85,7 +101,7 @@ const Signup = props => {
 		// 	return false;
 		// }
 
-		dispatch(userActions.signupAPI(email, password, name));
+		dispatch(userActions.signupAPI(email, password, confirmpassword, name));
 	};
 	return (
 		<React.Fragment>
@@ -175,7 +191,9 @@ const Signup = props => {
 										width="332px"
 										onClick={() => {}}
 										onChange={e => {
-											passwordConfirm(e.target.value);
+											// setPwCheck(e.target.value);
+											// changePwMacth(e);
+											changePwCheck(e);
 										}}
 									/>
 								</Grid>
@@ -195,7 +213,8 @@ const Signup = props => {
 										padding="14px"
 										width="332px"
 										onChange={e => {
-											setName(e.target.value);
+											// setName(e.target.value);
+											changeName(e);
 										}}
 									/>
 								</Grid>

@@ -19,7 +19,7 @@ const Container = styled.div`
 
 const ProductSlickLayout = styled.div`
 	width: 53%;
-	height: 500px;
+	height: 100%;
 	margin: 80px auto;
 `;
 

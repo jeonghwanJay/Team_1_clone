@@ -6,13 +6,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as cartActions } from '../redux/modules/cart';
 import { history } from '../redux/configureStore';
 import { priceUnit } from '../shared/common';
+import Post from '../components/Post'
 const Cart = props => {
 	const dispatch = useDispatch();
 	const user_info = useSelector(state => state.user.user);
 	const cart_list = useSelector(state => state.cart.cart_list);
+
+	const [address, setAddress] = React.useState("");
+	const [popup, setPopup] = React.useState(false);
+
 	console.log(cart_list);
 	// 장바구니에 담긴 상품의 총 금액.
-	let total_price = cart_list.map(c => c.price * c.quantity).reduce((acc, curr) => acc + curr, 0);
+	let total_price = cart_list.map(c => parseInt(c.price.replace(/,/g, "")) * c.quantity).reduce((acc, curr) => acc + curr, 0);
 	//기본 배송비 상품 담았을 때, 안 담았을 때.
 	const delivery_charge = cart_list.length === 0 ? 0 : 3000;
 	useEffect(() => {
@@ -45,8 +50,17 @@ const Cart = props => {
 								<Text size="14px" color="#5f0080">
 									샛별배송
 								</Text>
-								<InputBox>
-									<span>배송지 변경</span>
+								{/* <Text size="16px" weight="700" color="#4c4c4c">{user.address}</Text> */}
+								<InputBox  onClick={()=>{
+											setPopup(!popup)
+											}}
+											>🔍︎ 주소 검색
+									{/* <span>주소 검색</span> */}
+									
+											{
+										popup && 
+											<Post address={address} setAddress={setAddress}></Post>
+											} 
 								</InputBox>
 							</AddressBox>
 							<PriceBox>

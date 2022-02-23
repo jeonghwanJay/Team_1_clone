@@ -17,16 +17,17 @@ const CartCard = props => {
 		setCartList(cart);
 	}, [cartList, cart]);
 
-	function onClickMinus(quantity, id) {
+	function onClickMinus(quantity, postId) {
 		if (quantity > 1) {
-			dispatch(cartActions.updateQuantity(quantity - 1, id));
+			dispatch(cartActions.updateQuantityM(quantity - 1, postId));
 			return;
 		}
 	}
 
-	const onClickPlus = (quantity, id) => {
-		dispatch(cartActions.updateQuantity(quantity + 1, id));
+	const onClickPlus = (quantity, postId) => {
+		dispatch(cartActions.updateQuantityP(quantity + 1, postId));
 	};
+	
 
 	return (
 		<React.Fragment>
@@ -42,7 +43,7 @@ const CartCard = props => {
 							<CountBtn onClick={() => onClickPlus(e.quantity, e.postId)}>+</CountBtn>
 							<CountBtn onClick={() => onClickMinus(e.quantity, e.postId)}>-</CountBtn>
 						</CountBox>
-						<h4>{e.price * e.quantity}원</h4>
+						<h4>{parseInt(e.price.replace(/,/g, "")) * e.quantity}원</h4>
 						<DeleteBtn
 							onClick={() => {
 								console.log(e.postId);

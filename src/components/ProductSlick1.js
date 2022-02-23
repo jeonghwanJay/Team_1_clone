@@ -135,9 +135,11 @@ return (
             <div style={{ textAlign: 'center', marginBottom: '2em' }}>
                 <span style={{ fontSize: '1.8em', fontWeight: 'bold', }}>베스트</span>
             </div>
-			<Grid width="1050px" flex>
-			<Count>총 296개</Count>
-			<div style={{ display: "flex" }}>
+			<Grid width="1050px" flex >
+			<div style={{ display: "flex" , marginLeft: '-18px'}}>
+			<Count>총 99개</Count>
+			</div>
+			<div style={{ display: "flex" , marginRight: '15px'}}>
                 <Sort>추천순</Sort>
                 <Line> | </Line>
                 <Sort>신상품순</Sort>
@@ -149,11 +151,13 @@ return (
                 <Sort>높은 가격순</Sort>
               </div>
 			</Grid>
-            <Slider {...settings}>
-                {productsList?.map((v, i) => (
-                    <Card key={i} title={v.title} img={v.img} price={v.price} />
-                ))}
-            </Slider>
+			<Grid gridBox {...settings}>
+					{productsList?.map((v, i) => (
+						<div style={{ display:'flex'}} key={i}>
+							<Card key={i} title={v.title} img={v.img} price={v.price} postId={v.postId}/>
+						</div>
+					))}
+				</Grid>
         </Wrap>
     </>
 );

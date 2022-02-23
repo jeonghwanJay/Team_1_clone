@@ -6,6 +6,7 @@ import Bargain from '../components/Bargain';
 import CardList from '../components/CardList';
 import Event from '../components/Event';
 import ProductSlick from '../components/ProductSlick';
+
 import { actionCreators as productsActions } from '../redux/modules/product';
 
 const Container = styled.div`
@@ -19,25 +20,31 @@ const Container = styled.div`
 
 const ProductSlickLayout = styled.div`
 	width: 53%;
-	height: 500px;
+	height: 100%;
 	margin: 80px auto;
 `;
 
+// const product_list_count = useSelector(
+//     (state) => state.product.products.numberOfElements
+//   );
+
+
 const Main = () => {
 	const dispatch = useDispatch();
+	// const user_info = useSelector((state) => state.user.user);
 
 	const productsList = useSelector(state => state.product.list);
-
+	// const productsList = useSelector(state => state.product.products);
 	useEffect(() => {
 		dispatch(productsActions.getProductsMiddleWare());
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<>
 			<Container>
 				<Event />
 				<ProductSlickLayout>
-					<ProductSlick productsList={productsList} />
+					<ProductSlick productsList={productsList}/>
 				</ProductSlickLayout>
 				{/* <Bargain /> */}
 				{/* <CardList productsList={productsList} /> */}
