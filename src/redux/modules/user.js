@@ -1,52 +1,34 @@
-// 첫째,createAction와 handleActions는 Action과 리듀서를 편하게 만들어준다.
 import { createAction, handleActions } from 'redux-actions';
-// 둘째, immer를 가지고와야 불변성관리가 편하다.
 import { produce } from 'immer';
 import { api } from '../../shared/api';
 import { setCookie } from '../../shared/Token';
 
-// 2. actions(액션타입)
-// 첫째, 로그아웃 정보를 가지고 온다.
 const LOGIN = 'LOGIN';
 const LOG_OUT = 'LOG_OUT';
-// 둘째, 유저정보를 가져온다.
 const SET_USER = 'SET_USER';
 
-// 3. action creator(액션 생성 함수들)
-// 첫째, createAction사용해서 LOG_IN타입을 넘겨준다. ()안에는 파라미터 값 즉 정보를 주고 user값을 넘겨준다.
 const setUser = createAction(SET_USER, user => ({ user }));
 const setLogin = createAction(LOGIN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
 
-// 4. initialState(초기값)을 잡아준다.
 const initialState = {
 	user: [],
 	is_login: false,
 };
 
-// 회원가입
+	// 회원가입
 const signupAPI = (email, password, confirmpassword, name) => {
 	return function (dispatch, getState, { history }) {
-		// console.log('아이디', id);
-		// console.log('비밀번호', pw);
-		// console.log('비밀번호확인', passwordConfirm);
-		// console.log('이메일', email);
-		// console.log('이름', name);
+
 		console.log('아이디', email);
 		console.log('비밀번호', password);
-		// console.log('비밀번호확인', pwCheck);
 		console.log('이름', name);
 		api
 			.post('/user/join', {
-				// userId: id,
-				// password: pw,
-				// passwordConfirm: passwordConfirm,
-				// email: email,
-				// name: name,
+
 				email: email,
 				password: password,
 				confirmpassword: confirmpassword,
-				// pwCheck: pwCheck,
 				name: name,
 				
 			})
@@ -63,37 +45,7 @@ const signupAPI = (email, password, confirmpassword, name) => {
 	};
 };
 
-// 로그인
-// const loginAPI = (email, password) => {
-// 	return function (dispatch, getState, { history }) {
-// 		console.log(email, password);
-// 		api
-// 			.post('/user/login', {
-// 				// userId: id,
-// 				// password: pw,
-// 				email: email,
-// 				password: password,
-// 			})
-// 			.then(res => {
-// 				console.log(res);
-// 				localStorage.setItem('token', res.data.token);
-// 				const base64Payload = res.data.token.split('.')[1];
-// 				const payload = Buffer.from(base64Payload, 'base64');
-// 				const result = JSON.parse(payload.toString());
-// 				localStorage.setItem('userInfo', result.userId);
-// 				dispatch(
-// 					setUser({
-// 						name: result.userId,
-// 					}),
-// 				);
-// 				history.push('/');
-// 			})
-// 			.catch(err => {
-// 				alert(err.response.data.msg);
-// 			});
-// 	};
-// };
-
+	// 로그인
 const loginAPI =
   (email, password) =>
   async (dispatch, getState, { history }) => {
@@ -123,7 +75,7 @@ const loginAPI =
       });
   };
 
-// 로그아웃
+	// 로그아웃
 const logout = () => {
 	return function (dispatch, getState, { history }) {
 		localStorage.removeItem('token');
@@ -149,12 +101,11 @@ const isLogin = () => {
 	};
 };
 
-// 5. reducer(리듀서)
+	// 리듀서
 export default handleActions(
 	{	
 		[LOGIN]: (state, action) =>
       		produce(state, (draft) => {
-        // setCookie("is_login", "success");
         console.log("LOGIN 리듀서로 도착했습니다", state, action.payload);
         		draft.user = action.payload.user;
 				draft.is_login = true;
@@ -173,8 +124,6 @@ export default handleActions(
 	initialState,
 );
 
-// 6. action creator export
-// 액션생성함수를 내보낸다.
 const actionCreators = {
 	signupAPI,
 	loginAPI,

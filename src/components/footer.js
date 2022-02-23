@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Text } from '../elements';
 import Icons from '../images/incons.png'
+
 const Footer = props => {
 	return (
 		<>
 			<IN width="1050px">
 				<Inner display="flex" width="534px">
+
 					<Position display="flex" width="160px" margin="20px">
-						<Text size="20px" margin="0px 0px 22px 0px">
-							고객행복센터
-						</Text>
-						<Text bold size="28px">
-							1644-1107
-						</Text>
+						<Text size="20px" margin="0px 0px 22px 0px">고객행복센터</Text>
+						<Text bold size="28px">1644-1107</Text>
+
 						<Button 
 							padding="9px 0px"
 							width="140px"
@@ -26,6 +25,7 @@ const Footer = props => {
 						>
 							카카오톡 문의
 						</Button>
+
 						<Button 
 							padding="9px 0px"
 							width="140px"
@@ -37,6 +37,7 @@ const Footer = props => {
 						>
 							1:1 문의
 						</Button>
+
 						<Button 
 							padding="9px 0px"
 							width="140px"
@@ -49,6 +50,7 @@ const Footer = props => {
 							대량주문 문의
 						</Button>
 					</Position>
+					
 					<Inner display="flex">
 						<CenterInfo>
 							<li>365고객센터</li>
@@ -60,7 +62,9 @@ const Footer = props => {
 						</CenterInfo>
 					</Inner>
 				</Inner>
+
 				<Position width="516px">
+
 					<KurlyMenu>
 						<Spot>컬리소개</Spot>
 						<Spot>컬리소개영상</Spot>
@@ -91,8 +95,10 @@ const Footer = props => {
 					</KurlyInfo>
 				</Position>
 			</IN>
+
 			<IN width="1050px">
 				<OutsideInfo>
+					
 					<Inner>
 						<img
 							src="https://res.kurly.com/pc/ico/2001/logo_isms.png"
@@ -105,6 +111,7 @@ const Footer = props => {
 							[유효기간]2019.04.01~2022.03.31
 						</Text>
 					</Inner>
+
 					<Inner>
 						<img
 							src="https://res.kurly.com/pc/ico/2001/logo_eprivacyplus.png"
@@ -116,6 +123,7 @@ const Footer = props => {
 							개인정보처리시스템인증 (ePRIVACY PLUS)
 						</Text>
 					</Inner>
+
 					<Inner>
 						<img
 							src="https://res.kurly.com/pc/service/main/2009/logo_payments.png"
@@ -128,6 +136,7 @@ const Footer = props => {
 							토스 페이먼츠 구매안전(에스크로)서비스를 이용하실 수 있습니다.
 						</Text>
 					</Inner>
+
 				</OutsideInfo>
 			</IN>
 		</>
@@ -149,16 +158,14 @@ const CenterInfo = styled.ul`
 `;
 
 const KurlyMenu = styled.ul`
-	// margin: 0px 0px 30px 500px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 14px;
 	gap: 12px;
 `;
+
 const KurlyInfo = styled.ul`
-	// margin-left: 800px;
-	// margin-bottom: 50px;
 	font-size: 12px;
 	color: #999999;
 	& li {
@@ -173,6 +180,7 @@ const KurlyInfo = styled.ul`
 		top: 8px;
 	}
 `;
+
 const OutsideInfo = styled.div`
 	display: flex;
 	box-sizing: border-box;
@@ -182,9 +190,11 @@ const OutsideInfo = styled.div`
 	color: #999999;
 	gap: 0px 32px;
 `;
+
 const Inner = styled.div`
 	display: flex;
 `;
+
 const Spot = styled.li`
 	margin-left: 5px;
 `;

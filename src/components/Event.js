@@ -4,13 +4,6 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const Wrap = styled.div`
-	width: 100%;
-	img {
-		width: 100%;
-	}
-`;
-
 const Event = () => {
 	const settings = {
 		infinite: true,
@@ -59,5 +52,12 @@ const Event = () => {
 		</>
 	);
 };
+
+const Wrap = styled.div`
+	width: 100%;
+	img {
+		width: 100%;
+	}
+`;
 
 export default Event;

@@ -1,6 +1,3 @@
-// Header.js
-
-// import를 한다.
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements/index';
@@ -8,37 +5,17 @@ import { history } from '../redux/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
 import user, { actionCreators as userActions } from '../redux/modules/user';
 
-// image
-import HeaderLeftImg from '../images/header-left-delivery.gif';
-
-// Header의 함수형 컴포넌트를 만든다.
 const Header = props => {
 	const dispatch = useDispatch();
 	const is_login = useSelector(state => state.user.is_login);
 	const userInfo = useSelector(state => state.user.user);
-	console.log(userInfo)
-
-	const headerChange = () => {
-		const headerbox = document.querySelector('.header');
-		const loginbox = document.querySelector('.scroll-event');
-
-		if (window.scrollY > 105) {
-			loginbox.style.display = 'none';
-			headerbox.style.position = 'fixed';
-			headerbox.style.zIndex = '300';
-			headerbox.style.width = '1050px';
-		} else {
-			loginbox.style.display = 'block';
-			headerbox.style.position = '';
-		}
-	};
 
 	useEffect(() => {
 		dispatch(userActions.isLogin());
 	}, [dispatch]);
 
 	const readyAlert = () => {
-		// alert('버전2를 기대해 주세요');
+
 	};
 
 	return (
@@ -46,6 +23,7 @@ const Header = props => {
 			<Grid width="1050px" margin="10px auto 0 auto">
 				<HeaderWrap className="header">
 					<ScrollMenu className="scroll-event">
+						
 						<Grid flex bg="white" height="22px">
 							<img
 								style={{ cursor: 'pointer', margin: '3px 0px 0px 0px' }}
@@ -53,39 +31,28 @@ const Header = props => {
 								width="121px"
 								alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송"
 							/>
-							<HeaderMenu>
-								{!is_login && (
-									<React.Fragment>
-										<li onClick={() => history.push('/signup')} className="header-menu signup">
-											회원가입
-										</li>
-										<li onClick={() => history.push('/login')} className="header-menu">
-											로그인
-										</li>
-									</React.Fragment>
-								)}
-								{is_login && (
-									<React.Fragment>
-										<li className="header-menu">
-											<MemberSpan>웰컴</MemberSpan>
-											{/* {userInfo?.user.name}님 */}
-											{userInfo?.email}님
-										</li>
-										<li
-											className="header-menu"
-											onClick={() => {
-												dispatch(userActions.logout());
-											}}
-										>
-											로그아웃
-										</li>
-									</React.Fragment>
-								)}
-								<li className="arrow" onClick={readyAlert}>
-									고객센터
-								</li>
-							</HeaderMenu>
+
+						<HeaderMenu>
+							
+							{!is_login && (
+								<React.Fragment>
+									<li onClick={() => history.push('/signup')} className="header-menu signup">회원가입</li>
+									<li onClick={() => history.push('/login')} className="header-menu">로그인</li>
+								</React.Fragment>
+							)}
+
+							{is_login && (
+								<React.Fragment>
+									<li className="header-menu"><MemberSpan>웰컴</MemberSpan>{userInfo?.email}님</li>
+									<li className="header-menu" onClick={() => {dispatch(userActions.logout())}}>로그아웃</li>
+								</React.Fragment>
+							)}
+
+							<li className="arrow" onClick={readyAlert}>고객센터</li>
+						
+						</HeaderMenu>
 						</Grid>
+
 						<Grid center height="63px">
 							<LogoImg
 								src="https://res.kurly.com/images/marketkurly/logo/logo_x2.png"
@@ -96,6 +63,7 @@ const Header = props => {
 							/>
 						</Grid>
 					</ScrollMenu>
+					
 					<Grid flex>
 						<Grid>
 							<HeaderCategory onClick={readyAlert}>
@@ -106,6 +74,7 @@ const Header = props => {
 								<li onClick={() => history.push('/Special')}> 특가/혜택</li>
 							</HeaderCategory>
 						</Grid>
+
 						<Grid>
 							<SearchInput
 								type="text"
@@ -114,13 +83,14 @@ const Header = props => {
 								readOnly
 							/>
 						</Grid>
+
 						<Grid>
 							<Icons className="adress-icon" onClick={readyAlert} />
 							<Icons 
 								className='heart-icon'
 								onClick={() => {
-									if (!userInfo) {
-										// alert('로그인 후 사용해주세요!');
+									if (!is_login) {
+										alert('로그인 후 사용해주세요!');
 										return false;
 									}
 									// history.push('/cart');
@@ -129,7 +99,7 @@ const Header = props => {
 							<Icons
 								className="cart-icon"
 								onClick={() => {
-									if (!userInfo) {
+									if (!is_login) {
 										alert('로그인 후 사용해주세요!');
 										return false;
 									}
@@ -144,7 +114,6 @@ const Header = props => {
 	);
 };
 
-// styled-components를 사용한다.
 const HeaderWrap = styled.div`
 	background-color: #ffffff;
 `;
