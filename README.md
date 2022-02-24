@@ -1,6 +1,9 @@
 <H1>Market Curly [FE]</H1>
 
-![스크린샷 2022-02-23 오후 8 55 07](https://user-images.githubusercontent.com/97425158/155314401-8558d176-520b-48be-a150-2742de58a844.png)
+<!-- ![스크린샷 2022-02-23 오후 8 55 07](https://user-images.githubusercontent.com/97425158/155314401-8558d176-520b-48be-a150-2742de58a844.png) -->
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/97425158/155457111-d549a345-d03b-4fe5-a500-86260b682822.gif)
+
 
 <H1>☑️ Summary</H1>
 
@@ -8,7 +11,7 @@
 
 <H4> 클론 대상 사이트 :&nbsp;<a href="https://www.kurly.com/shop/main/index.php?utm_source=1055&utm_medium=2202&utm_campaign=home_hashtag&utm_term=&gclid=Cj0KCQiA09eQBhCxARIsAAYRiymFTo_B-h_Ud0gO_bvKSG36IaBralIpgBFdb2WKsfT25LH5s8RrK-4aAm26EALw_wcB#%EB%A7%88%EC%BC%93%EC%BB%AC%EB%A6%AC&utm_content=brand" alt="#">마켓컬리</a> </H4>
 
-<H4> 📸 &nbsp;클론 페이지 : 로그인, 회원가입, 메인, 베스트, 알뜰쇼핑, 특가혜택, 장바구니</H4>
+<H4> 📸 &nbsp;클론 페이지 : 로그인, 회원가입, 메인, 베스트, 알뜰쇼핑, 특가/혜택, 장바구니</H4>
 <H4> 🛠 &nbsp;클론 기능 : 로그인, 회원가입, 베너 슬라이드 쇼, 상품 리스트 뷰, 장바구니 모달창, 장바구니 CRUD </H4> 
 
 <H4> ➤ <a href="https://www.naver.com" alt="클론사이트">사이트 바로가기</a> </H4>
@@ -57,6 +60,16 @@
 <H4> - 비밀번호 : 10글자 이상, 영문/숫자/특수문자(공백 제외) 3개 이상의 조합 </H4>
 <H4> - 비밀번호 확인 : 위 비밀번호와 일치하는지 확인 </H4>
 <H4> - 이름 : 사용자의 이름을 입력받음 , 형식은 자유(공백 제외) </H4> </br>
+
+<H3> 📎&nbsp; 메인(신상품), 베스트, 알뜰쇼핑 페이지 </H3>
+<H4> - 상품 조회 : 영역별 상품을 조회하고, 해당 상품 장바구니 버튼 클릭 시 장바구니 모달창 보여주기</H4>
+<H4> - 모달 창 : 해당 상품 개수 +,- 및 장바구니 담기 클릭 시 장바구니 페이지로 해당 제품 이동 </H4> </br>
+
+<H3> 📎&nbsp; 장바구니 페이지 </H3>
+<H4> - 로그인 한 유저가 현재까지 장바구니에 담은 상품을 조회할 수 있고, 장바구니 페이지 내에서 개수 +,- 수정 가능, 담은 제품 삭제 가능 </H4> </br>
+
+<H3> 📎&nbsp; 특가/혜택 페이지 </H3>
+<H4> - 뷰 : 배너 이미지 보여주기 </H4> </br>
 
 <H1> ⛳️&nbsp; 역할 담당 </H1>
   
