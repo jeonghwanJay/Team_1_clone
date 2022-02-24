@@ -27,10 +27,10 @@ const ImgBanner = styled.div`
 const Discount = () => {
 	const dispatch = useDispatch();
 
-	const productsList = useSelector(state => state.product.list);
+	const productsList = useSelector(state => state.product.list2);
 
 	useEffect(() => {
-		dispatch(productsActions.getProductsMiddleWare());
+		dispatch(productsActions.discountProductM());
 	}, [dispatch]);
 
 	return (

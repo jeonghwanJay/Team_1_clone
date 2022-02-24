@@ -10,7 +10,7 @@ const Best = () => {
 	const productsList = useSelector(state => state.product.list);
 
 	useEffect(() => {
-		dispatch(productsActions.getProductsMiddleWare());
+		dispatch(productsActions.bestProductM());
 	}, []);
 
 	return (
