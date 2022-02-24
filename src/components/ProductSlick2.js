@@ -128,7 +128,7 @@ const ProductSlick2 = ({ productsList }) => {
 			<Grid gridBox  {...settings}>
 					{productsList?.map((v, i) => (
 						<div style={{ display: "flex" , }} key={i}>
-						<Card key={i} title={v.title} img={v.img} price={v.price} postId={v.postId}/>
+						<Card key={i} title={v.title} img={v.img} price={v.price} postId={v.postId} discount={v.discount} oldprice={v.oldprice}/>
 					</div>
 					))}
 				</Grid>

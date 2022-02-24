@@ -17,6 +17,8 @@ const Card = ({
 	icon,
 	id,
 	postId,
+	discount,
+	oldprice,
 }) => {
 	const styles = {
 		width: width,
@@ -33,7 +35,7 @@ const Card = ({
 
 	return (
 		<>
-			{modalOpen && <Modal close={modalClose} postId={postId} title={title} price={price} id={id} img={img}/>}
+			{modalOpen && <Modal close={modalClose} postId={postId} title={title} price={price} id={id} img={img} discount={discount} oldprice={oldprice}/>}
 			<Layout {...styles}>
 				<Photo>
 					{<CartBtn onClick={modalClose} />}
@@ -41,9 +43,19 @@ const Card = ({
 				</Photo>
 				<TextLayout>
 					<Subject titleSize={titleSize}>{title}</Subject>
+
 					<Price priceSize={priceSize} color={color}>
-						{price && priceUnit(price)}
+						<span style={{color: "orange"}}>{discount}</span>	&nbsp;
+					{price && priceUnit(price)}
 					</Price>
+					{/* <Realprice priceSize={priceSize} color={"orange"}>
+					{discount && priceUnit(discount)} 
+					</Realprice> */}
+					<Oldprice priceSize={priceSize} color={"gray"}>
+					{oldprice && priceUnit(oldprice)} 
+					</Oldprice>
+					
+						
 				</TextLayout>
 			</Layout>
 		</>
@@ -94,6 +106,19 @@ const Price = styled.p`
 	font-size: ${props => props.priceSize};
 	font-weight: bold;
 	color: ${props => props.color};
+`;
+
+const Realprice = styled.p`
+	font-size: ${props => props.priceSize};
+	font-weight: bold;
+	color: ${props => props.color};
+`;
+
+const Oldprice = styled.p`
+	font-size: 14px;
+	font-weight: bold;
+	color: ${props => props.color};
+	text-decoration: line-through;
 `;
 
 const CartBtn = styled.div`
