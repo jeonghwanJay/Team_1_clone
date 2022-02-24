@@ -2,13 +2,14 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { api } from '../../shared/api';
 import { setCookie } from '../../shared/Token';
+import { deleteCookie } from '../../shared/Cookie';
 
 const LOGIN = 'LOGIN';
 const LOG_OUT = 'LOG_OUT';
 const SET_USER = 'SET_USER';
 
 const setUser = createAction(SET_USER, user => ({ user }));
-const setLogin = createAction(LOGIN, (user) => ({ user }));
+const setLogin = createAction(LOGIN, (email, user) => ({ email, user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
 
 const initialState = {
@@ -64,7 +65,7 @@ const loginAPI =
         localStorage.setItem("token", _cookie);
 
         dispatch(
-          setLogin({
+          setLogin( email, {
             email: email,
           })
         );
@@ -106,7 +107,9 @@ export default handleActions(
 	{	
 		[LOGIN]: (state, action) =>
       		produce(state, (draft) => {
-        console.log("LOGIN 리듀서로 도착했습니다", state, action.payload);
+				  setCookie("is_login", true);
+				  setCookie("userInfo", action.payload.email);
+        console.log("LOGIN 리듀서로 도착했습니다", action.payload.email);
         		draft.user = action.payload.user;
 				draft.is_login = true;
       }),
@@ -117,6 +120,8 @@ export default handleActions(
 			}),
 		[LOG_OUT]: (state, action) =>
 			produce(state, draft => {
+				deleteCookie("is_login");
+				deleteCookie("userInfo");
 				draft.user = null;
 				draft.is_login = false;
 			}),

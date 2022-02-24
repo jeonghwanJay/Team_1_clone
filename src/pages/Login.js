@@ -15,7 +15,7 @@ const Login = (props) => {
 
     if (email === "" || password === "") {
       console.log("아이디 혹은 비밀번호를 입력해주세요.");
-
+      alert("아이디 혹은 비밀번호를 입력해주세요.");
       return;
     }
 

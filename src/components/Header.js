@@ -4,11 +4,19 @@ import { Grid } from '../elements/index';
 import { history } from '../redux/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
 import user, { actionCreators as userActions } from '../redux/modules/user';
+import { getCookie } from '../shared/Cookie';
 
 const Header = props => {
 	const dispatch = useDispatch();
 	const is_login = useSelector(state => state.user.is_login);
 	const userInfo = useSelector(state => state.user.user);
+	const is_token = localStorage.getItem("token")?true:false;
+	const cookieId = getCookie("userInfo")
+	console.log(cookieId)
+
+	// obj[Object.keys(obj)[0]];
+
+	console.log(userInfo, is_login)
 
 	useEffect(() => {
 		dispatch(userActions.isLogin());
@@ -34,16 +42,16 @@ const Header = props => {
 
 						<HeaderMenu>
 							
-							{!is_login && (
+							{!is_token && (
 								<React.Fragment>
 									<li onClick={() => history.push('/signup')} className="header-menu signup">회원가입</li>
 									<li onClick={() => history.push('/login')} className="header-menu">로그인</li>
 								</React.Fragment>
 							)}
 
-							{is_login && (
+							{is_token &&  (
 								<React.Fragment>
-									<li className="header-menu"><MemberSpan>웰컴</MemberSpan>{userInfo?.email}님</li>
+									<li className="header-menu"><MemberSpan>웰컴</MemberSpan>{cookieId}님</li>
 									<li className="header-menu" onClick={() => {dispatch(userActions.logout())}}>로그아웃</li>
 								</React.Fragment>
 							)}
@@ -89,7 +97,7 @@ const Header = props => {
 							<Icons 
 								className='heart-icon'
 								onClick={() => {
-									if (!is_login) {
+									if (!is_token) {
 										alert('로그인 후 사용해주세요!');
 										return false;
 									}
@@ -99,7 +107,7 @@ const Header = props => {
 							<Icons
 								className="cart-icon"
 								onClick={() => {
-									if (!is_login) {
+									if (!is_token) {
 										alert('로그인 후 사용해주세요!');
 										return false;
 									}
