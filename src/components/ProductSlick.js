@@ -1,39 +1,10 @@
 import React from 'react';
-import Slider from 'react-slick';
 import styled from 'styled-components';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Grid from '../elements/Grid';
 import Card from '../elements/Card';
-import { useSelector } from 'react-redux';
 
-
-
-const Wrap = styled.div`
-	width: 100%;
-	margin: 0;
-`;
-
-const Count = styled.p`
-  font-size: 12px;
-  color: #333;
-  line-height: 18px;
-`;
-
-const Sort = styled.p`
-  font-size: 12px;
-  color: #999;
-  line-height: 18px;
-  margin-left: 6px;
-  cursor: pointer;
-`;
-
-const Line = styled.p`
-  font-size: 12px;
-  color: #9999;
-  line-height: 18px;
-  margin-left: 6px;
-`;
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 function NextArrow(props) {
@@ -101,10 +72,6 @@ function PrevArrow(props) {
 }
 
 const ProductSlick = ({ productsList }) => {
-
-	// const product_list_count = useSelector(
-	// 	(state) => state.product.products.numberOfElements
-	//   );
 
 	const settings = {
 		speed: 500,
@@ -175,5 +142,31 @@ const ProductSlick = ({ productsList }) => {
 };
 
 
+
+const Wrap = styled.div`
+	width: 100%;
+	margin: 0;
+`;
+
+const Count = styled.p`
+  font-size: 12px;
+  color: #333;
+  line-height: 18px;
+`;
+
+const Sort = styled.p`
+  font-size: 12px;
+  color: #999;
+  line-height: 18px;
+  margin-left: 6px;
+  cursor: pointer;
+`;
+
+const Line = styled.p`
+  font-size: 12px;
+  color: #9999;
+  line-height: 18px;
+  margin-left: 6px;
+`;
 
 export default ProductSlick;

@@ -1,102 +1,12 @@
-// import { createAction, handleActions } from 'redux-actions';
-// import { produce } from 'immer';
-
-// import { api } from '../../shared/api';
-
-// const GET_PRODUCTS = 'GET_PRODUCTS';
-// const LOADING = 'LOADING';
-
-// const getProducts = createAction(GET_PRODUCTS, products => ({
-// 	products,
-// }));
-// const loading = createAction(LOADING, isLoading => ({
-// 	isLoading,
-// }));
-
-// const initialState = {
-// 	products: [],
-// 	isLoading: false,
-// 	// list: [
-// 	// 	{	
-// 	// 		postId: "postId",
-// 	// 		title: '[올리타리아] 엑스트라 버진 올리브유',
-// 	// 		img: 'https://img-cf.kurly.com/shop/data/goods/1587519777879l0.jpg',
-// 	// 		price: 15000,
-// 	// 	},
-// 	// ]
-// };
-
-// const getProductsMiddleWare = () => {
-// 	return function (dispatch, getState, { history }) {
-// 		dispatch(loading(true));
-// 		api
-// 			.get('page/main/new')
-// 			.then(
-// 				(res) => {
-// 					// const products = res.data;
-// 					// const products = res.data.post;
-// 					// const products = res.data.list
-// 					let products = [];
-// 					res.forEach((p)=>{
-// 						let product = {
-// 							postId: p.postId,
-// 							title: p.title,
-// 							price: p.price,
-// 							img: p.img,
-// 						}
-// 					products.push(product);
-// 					})
-// 					dispatch(getProducts(products));
-// 				},
-// 				// { withCredentials: true },
-// 			)
-// 			.catch(err => {
-// 				console.error(err);
-// 				dispatch(loading(false));
-// 			});
-// 	};
-
-// 	// return function(dispatch) {
-// 	// 	api 
-// 	// 	.get('/page/main/new')
-// 	// 	.then(res=>{
-		  
-// 	// 		dispatch(getProducts(res.data));
-// 	// 	})
-// 	// 	.catch(err=> console.log(err));
-// 	// }
-// };
-
-// export default handleActions(
-// 	{
-// 		[GET_PRODUCTS]: (state, action) =>
-// 			produce(state, draft => {
-// 				draft.list = action.payload.products;
-// 				// draft.sortByNew = action.payload.products;
-// 				draft.isLoading = false;
-// 			}),
-// 		[LOADING]: (state, action) =>
-// 			produce(state, draft => {
-// 				draft.isLoading = action.payload.isLoading;
-// 			}),
-// 	},
-// 	initialState,
-// );
-
-// const actionCreators = {
-// 	getProducts,
-// 	getProductsMiddleWare,
-// };
-
-// export { actionCreators };
-
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-
 import { api } from '../../shared/api';
 
 const GET_PRODUCTS = 'GET_PRODUCTS';
 const LOADING = 'LOADING';
+
+const BEST_PRODUCT = "BEST_PRODUCT";
+const DISCOUNT_PRODUCT = "DISCOUNT_PRODUCT";
 
 const getProducts = createAction(GET_PRODUCTS, products => ({
 	products,
@@ -105,46 +15,23 @@ const loading = createAction(LOADING, isLoading => ({
 	isLoading,
 }));
 
+const bestProduct = createAction(BEST_PRODUCT, (post_list) => ({ post_list }));
+const discountProduct = createAction(DISCOUNT_PRODUCT, (post_list) => ({post_list,}));
+
 const initialState = {
-	// list: [
-	// 	{	
-	// 		postId: 'postId',
-	// 		title: '[올리타리아] 엑스트라 버진 올리브유',
-	// 		img: 'https://img-cf.kurly.com/shop/data/goods/1587519777879l0.jpg',
-	// 		price: 15000,
-	// 	},
-	// ],
 	list: [],
+	list2: [],
 	isLoading: false,
 };
 
-// const getProductsMiddleWare = () => {
-// 	return dispatch => {
-// 		dispatch(loading(true));
-// 		api
-// 			.get('/page/main/new')
-// 			.then(
-// 				res => {
-// 					const products = res.data.post;
-// 					dispatch(getProducts(products));
-// 				},
-// 				{ withCredentials: true },
-// 			)
-// 			.catch(err => {
-// 				console.error(err);
-// 				dispatch(loading(false));
-// 			});
-// 	};
-// };
-
+	// 메인페이지 제품들 보여주기
 const getProductsMiddleWare = () => {
-	return function (dispatch, getState, { history }) {
+	return function (dispatch) {
 	  
 	  dispatch(loading(true));
   
 	  api
 	  	.get('/page/main/new')
-	//   fetch(API).then((response) => response.json())
 		.then((result) => {
 		  console.log(result.data.sortByNew)
 		  
@@ -158,7 +45,6 @@ const getProductsMiddleWare = () => {
 			  postId: p.postId,
 			  title: p.title,
 			  price: p.price,
-			//   subtext: p.subtext,
 			  img:p.img,
 			}
 		  products.push(product);
@@ -166,6 +52,42 @@ const getProductsMiddleWare = () => {
 		  dispatch(getProducts(products));
 		})
 	}
+  };
+
+  const bestProductM = () => async (dispatch, getState) => {
+	api
+	  .get("page/sub/best")
+	  .then((res) => {
+		const best_data = res.data;
+		const best_datas = best_data.sortByBest;
+		let best_list = [];
+  
+		best_datas.forEach((doc) => {
+		  best_list.push({ id: doc.id, ...doc });
+		});
+		dispatch(bestProduct(best_list));
+	  })
+	  .catch((err) => {
+		console.log(err);
+	  });
+  };
+  
+  const discountProductM = () => async (dispatch, getState) => {
+	api
+	  .get("/page/sub/discount")
+	  .then((res) => {
+		const discount_data = res.data;
+		const discount_datas = discount_data.sortByDis;
+		let discount_list = [];
+  
+		discount_datas.forEach((doc) => {
+		  discount_list.push({ id: doc.id, ...doc });
+		});
+		dispatch(discountProduct(discount_list));
+	  })
+	  .catch((err) => {
+		console.log(err);
+	  });
   };
 
 export default handleActions(
@@ -179,6 +101,15 @@ export default handleActions(
 			produce(state, draft => {
 				draft.isLoading = action.payload.isLoading;
 			}),
+		[BEST_PRODUCT]: (state = initialState, action = {}) => {
+				console.log("Best product 리듀서로 도착했습니다", state, action.payload);
+				return { ...state, list: action.payload.post_list };
+			  },
+		  
+		[DISCOUNT_PRODUCT]: (state = initialState, action = {}) => {
+				return { ...state, list2: action.payload.post_list };
+			  },
+		
 	},
 	initialState,
 );
@@ -186,6 +117,8 @@ export default handleActions(
 const actionCreators = {
 	getProducts,
 	getProductsMiddleWare,
+	bestProductM,
+	discountProductM
 };
 
 export { actionCreators };

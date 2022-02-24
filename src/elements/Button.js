@@ -1,12 +1,7 @@
-// Button.js
-
-// import를 한다.
 import React from 'react';
 import styled from 'styled-components';
 
-// Button 함수형 컴포넌트를 만든다.
 const Button = props => {
-	// 둘째, defaultProps에서 설정해준 값을 가져온다.
 	const {
 		text,
 		children,
@@ -22,7 +17,6 @@ const Button = props => {
 		onClick,
 	} = props;
 
-	// 넷째, children은 스타일을 담당하는 친구가 아니기 때문에 styles안에서 관리한다.
 	const styles = {
 		width: width,
 		padding: padding,
@@ -43,7 +37,6 @@ const Button = props => {
 	);
 };
 
-// 첫째, defaultProps를 설정한다.
 Button.defaultProps = {
 	children: null,
 	text: false,
@@ -59,7 +52,6 @@ Button.defaultProps = {
 	onClick: () => {},
 };
 
-// 셋째, styled-components를 사용한다.
 const BasicButton = styled.button`
 	width: ${props => props.width};
 	cursor: pointer;
@@ -82,5 +74,4 @@ const BasicButton = styled.button`
 	}
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정해 둔다.
 export default Button;

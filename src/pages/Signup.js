@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements/index';
-
 import { actionCreators as userActions } from '../redux/modules/user';
 import { useDispatch } from 'react-redux';
-import { idCheck, pwMacth, pwContinuous, emailCheck } from '../shared/common';
+import { pwMacth, emailCheck } from '../shared/common';
 import { api } from '../shared/api';
 
-// Signup 함수형 컴포넌트를 만든다.
 const Signup = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmpassword, setConfirmPassword] = useState('');
 	const [name, setName] = useState('');
-	// const [email, setEmail] = useState('');
 	const [emailDup, setEmailDup] = useState(false);
 	const dispatch = useDispatch();
 
-	//해당 조건 충족 여부에 따라 info 다르게..
 	const changeId = e => {
 		setEmail(e.target.value);
 	};
@@ -25,7 +21,6 @@ const Signup = props => {
 	console.log('비밀번호', password);
 	console.log('비밀번호확인', confirmpassword);
 	console.log('이름', name);
-	// console.log('이메일', email);
 
 	const changePw = e => {
 		const targetPw = e.target.value;
@@ -35,11 +30,6 @@ const Signup = props => {
 	const changePwCheck = e => {
 		const targetPwCheck = e.target.value;
 		setConfirmPassword(targetPwCheck)
-	};
-
-	const changePwMacth = e => {
-		const checkPw = e.target.value;
-		setConfirmPassword(checkPw);
 	};
 
 	const changeName = e => {
@@ -81,25 +71,11 @@ const Signup = props => {
 			alert('동일한 비밀번호를 입력해주세요.');
 			return;
 		}
-		// if (changePw === changePwCheck) {
-		// 	alert('동일한 비밀번호를 입력해주세요!')
-		// 	return false;
-		// }
 
 		if (name === '') {
 			alert('이름을(를) 입력해주세요.');
 			return false;
 		}
-
-		// if (email === '') {
-		// 	alert('이메일을 입력해주세요.');
-		// 	return false;
-		// }
-
-		// if (!emailCheck(email)) {
-		// 	alert('이메일 형식을 지켜주세요!');
-		// 	return false;
-		// }
 
 		dispatch(userActions.signupAPI(email, password, confirmpassword, name));
 	};
@@ -149,10 +125,6 @@ const Signup = props => {
 										중복확인
 									</Button>
 								</Grid>
-								{/* <InfoUl className="checkId">
-									<li>· 6자 이상의 영문 혹은 영문과 숫자를 조합</li>
-									<li>· 아이디 중복확인</li>
-								</InfoUl> */}
 							</td>
 						</tr>
 						<tr>
@@ -191,15 +163,10 @@ const Signup = props => {
 										width="332px"
 										onClick={() => {}}
 										onChange={e => {
-											// setPwCheck(e.target.value);
-											// changePwMacth(e);
 											changePwCheck(e);
 										}}
 									/>
 								</Grid>
-								{/* <InfoUl className="ReCheckPw">
-									<li>·동일한 비밀번호를 입력해주세요.</li>
-								</InfoUl> */}
 							</td>
 						</tr>
 						<tr>
@@ -213,30 +180,12 @@ const Signup = props => {
 										padding="14px"
 										width="332px"
 										onChange={e => {
-											// setName(e.target.value);
 											changeName(e);
 										}}
 									/>
 								</Grid>
 							</td>
 						</tr>
-						{/* <tr>
-							<td>
-								이메일<CheckSpan>*</CheckSpan>
-							</td>
-							<td>
-								<Grid flex width="460px">
-									<Input
-										placeholder="예: marketkurly@kurly.com"
-										padding="14px"
-										width="332px"
-										onChange={e => {
-											setEmail(e.target.value);
-										}}
-									/>
-								</Grid>
-							</td>
-						</tr> */}
 					</tbody>
 				</SignTable>
 				<Button width="240px" onClick={signUp}>
@@ -247,7 +196,6 @@ const Signup = props => {
 	);
 };
 
-// styled-components를 사용한다.
 const SignupWrap = styled.div`
 	width: 640px;
 	display: flex;
@@ -305,5 +253,4 @@ const InfoUl = styled.ul`
 	list-style: none;
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정해 둔다.
 export default Signup;

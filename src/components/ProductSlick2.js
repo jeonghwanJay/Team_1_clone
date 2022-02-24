@@ -1,37 +1,10 @@
 import React from 'react';
-import Slider from 'react-slick';
 import styled from 'styled-components';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 import Card from '../elements/Card';
 import Grid from '../elements/Grid';
 
-const Wrap = styled.div`
-	width: 100%;
-	margin: 0;
-`;
-
-const Count = styled.p`
-  font-size: 12px;
-  color: #333;
-  line-height: 18px;
-`;
-
-const Sort = styled.p`
-  font-size: 12px;
-  color: #999;
-  line-height: 18px;
-  margin-left: 6px;
-  cursor: pointer;
-`;
-
-const Line = styled.p`
-  font-size: 12px;
-  color: #9999;
-  line-height: 18px;
-  margin-left: 6px;
-`;
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function NextArrow(props) {
 	const { className, style, onClick } = props;
@@ -155,7 +128,7 @@ const ProductSlick2 = ({ productsList }) => {
 			<Grid gridBox  {...settings}>
 					{productsList?.map((v, i) => (
 						<div style={{ display: "flex" , }} key={i}>
-						<Card key={i} title={v.title} img={v.img} price={v.price} postId={v.postId}/>
+						<Card key={i} title={v.title} img={v.img} price={v.price} postId={v.postId} discount={v.discount} oldprice={v.oldprice}/>
 					</div>
 					))}
 				</Grid>
@@ -164,6 +137,30 @@ const ProductSlick2 = ({ productsList }) => {
 	);
 };
 
+const Wrap = styled.div`
+	width: 100%;
+	margin: 0;
+`;
 
+const Count = styled.p`
+  font-size: 12px;
+  color: #333;
+  line-height: 18px;
+`;
+
+const Sort = styled.p`
+  font-size: 12px;
+  color: #999;
+  line-height: 18px;
+  margin-left: 6px;
+  cursor: pointer;
+`;
+
+const Line = styled.p`
+  font-size: 12px;
+  color: #9999;
+  line-height: 18px;
+  margin-left: 6px;
+`;
 
 export default ProductSlick2;

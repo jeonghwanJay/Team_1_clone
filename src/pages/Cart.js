@@ -7,6 +7,7 @@ import { actionCreators as cartActions } from '../redux/modules/cart';
 import { history } from '../redux/configureStore';
 import { priceUnit } from '../shared/common';
 import Post from '../components/Post'
+
 const Cart = props => {
 	const dispatch = useDispatch();
 	const user_info = useSelector(state => state.user.user);
@@ -50,13 +51,11 @@ const Cart = props => {
 								<Text size="14px" color="#5f0080">
 									샛별배송
 								</Text>
-								{/* <Text size="16px" weight="700" color="#4c4c4c">{user.address}</Text> */}
+								{/* <Text size="16px" weight="700" color="#4c4c4c">{Post.address}</Text> */}
 								<InputBox  onClick={()=>{
 											setPopup(!popup)
 											}}
-											>🔍︎ 주소 검색
-									{/* <span>주소 검색</span> */}
-									
+											>🔍︎ 주소 검색								
 											{
 										popup && 
 											<Post address={address} setAddress={setAddress}></Post>
@@ -106,8 +105,6 @@ const Cart = props => {
 		</Grid>
 	);
 };
-
-export default Cart;
 
 const All = styled.div`
 	display: flex;
@@ -259,3 +256,5 @@ const TotalPrice = styled.span`
 	color: #4c4c4c;
 	font-weight: 500;
 `;
+
+export default Cart;

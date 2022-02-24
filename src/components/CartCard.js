@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { priceUnit } from '../shared/common';
 import { actionCreators as cartActions } from '../redux/modules/cart';
 
 const CartCard = props => {
-	// const [count, setCount] = useState(0);
-	// const originalPrice = props.productCount;
 	const dispatch = useDispatch();
 	const [cartList, setCartList] = useState();
 
